@@ -1,25 +1,51 @@
 <?php
-include 'db_connection.php';
+$firstname = filter_input(INPUT_POST, 'firstname');
+$lastname = filter_input(INPUT_POST, 'lastname');
+$email = filter_input(INPUT_POST, 'email');
+$password = filter_input(INPUT_POST, 'password');
 
-	$firstName = $_POST['firstName'];
-	$lastName = $_POST['lastName'];
-	$gender = $_POST['gender'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$number = $_POST['number'];
+if(!empty($firstname))
+{
+	if(!empty($lastname))
+	{
+		$host = "localhost";
+		$dbusername = "root";
+		$dbpassword = "";
+		$dbname = "test";
 
-	// Database connection
-	$conn = new mysqli('localhost','root','','test');
-	if($conn->connect_error){
-		echo "$conn->connect_error";
-		die("Connection Failed : ". $conn->connect_error);
-	} else {
-		$stmt = $conn->prepare("insert into registration(firstName, lastName, gender, email, password, number) values(?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssssi", $firstName, $lastName, $gender, $email, $password, $number);
-		$execval = $stmt->execute();
-		echo $execval;
-		echo "Registration successfully...";
-		$stmt->close();
-		$conn->close();
+
+		//creating the connection
+		$conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
+
+		if(mysqli_connect_error())
+		{
+			die('Connect Error('. mysqli_connect_errno() .') '
+			. mysqli_connect_error());
+		}
+		else
+		{
+			$sql = "INSERT INTO users (firstname, lastname, email, password)
+			VALUES ('$firstname', '$lastname', '$email', '$password')";
+			if($conn->query($sql))
+			{
+				echo "New record is inserted successfully";
+			}
+			else
+			{
+				echo "Error: ". $sql ."<br>". $conn->error;
+			}
+
+			$conn->close();
+		}
 	}
+	else{
+		echo: "lastname should not be empty";
+	}
+}
+else{
+	echo "firstname should not be empty";
+	die();
+}
+
+
 ?>
