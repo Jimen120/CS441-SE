@@ -30,8 +30,9 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="home.html">HOME</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
           <li><a href="account.html">Account</a></li>
-          <li><a href="login.html">Log-in / Sign up</a></li>
+          <li><a href="login.html">Log-in</a></li>
         </ul>
       </div>
     </div>
@@ -41,14 +42,15 @@
 
 <div class="container">
   <h2>Make A Wish List Sign Up Page</h2>
-  <form action="/action_page.php">
+  <!-- this is the new PHP code 5:28 -->
+  <form action="connect.php" method = "post">
     <div class="form-group">
       <label for="email">Email/Phone:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email or Phone Number" name="email">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
@@ -78,4 +80,4 @@
 
 
 </body>
-</html>
+</html> 
